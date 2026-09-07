@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "swiftCompiler": {
+    "extraCLIOptions": [
+      "-enable-experimental-feature", "Embedded",
+      "-enable-experimental-feature", "Extern",
+      "-Xfrontend", "-disable-stack-protector",
+      "-Xclang-linker", "-nostdlib",
+      "-Xclang-linker", "-fuse-ld=lld",
+      "-Xcc", "-march=rv32imac",
+      "-Xcc", "-mabi=ilp32"
+    ]
+  },
+  "cCompiler": {
+    "extraCLIOptions": [
+      "-march=rv32imac",
+      "-mabi=ilp32"
+    ]
+  },
+  "linker": {
+    "extraCLIOptions": [
+      "--gc-sections",
+      "--orphan-handling=warn",
+      "-Map", "map.txt"
+    ]
+  }
+}

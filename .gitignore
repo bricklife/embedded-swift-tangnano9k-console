@@ -1,0 +1,28 @@
+.DS_Store
+*.todo
+
+# FPGA build outputs
+fpga/build/
+fpga/impl/
+fpga/*.gprj
+fpga/*.gprj.user
+fpga/*.gprj.bak
+
+# Swift / package build
+**/.build/
+**/.swiftpm/
+**/map.txt
+
+# Firmware binaries (rebuild from source)
+**/*.elf
+**/*.bin
+**/*.hex
+!**/.gitkeep
+
+# Keep checked-in bootloader hex used for synth preload convenience
+!bootloader/bootloader.hex
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,127 @@
+// Pin constraints for Hazard3 example SoC on Tang Nano 9K (GW1NR-9C)
+
+// 27 MHz on-board oscillator
+IO_LOC "clk_osc" 52;
+IO_PORT "clk_osc" IO_TYPE=LVCMOS33;
+
+// Button S2 (active-low, used as system reset)
+IO_LOC "btn" 3;
+IO_PORT "btn" IO_TYPE=LVCMOS18;
+
+// External button GPIO inputs (12 pins)
+// BANK1, 3.3V: 49,48,76,77 (left, up, down, right)
+IO_LOC "btn_gpio[0]" 49;
+IO_LOC "btn_gpio[1]" 48;
+IO_LOC "btn_gpio[2]" 76;
+IO_LOC "btn_gpio[3]" 77;
+IO_PORT "btn_gpio[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_PORT "btn_gpio[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_PORT "btn_gpio[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_PORT "btn_gpio[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// BANK3, 1.8V: 79,80,81,82,83,84（SELECT、START、Y、X、B、A）
+IO_LOC "btn_gpio[4]" 79;
+IO_LOC "btn_gpio[5]" 80;
+IO_LOC "btn_gpio[6]" 81;
+IO_LOC "btn_gpio[7]" 82;
+IO_LOC "btn_gpio[8]" 83;
+IO_LOC "btn_gpio[9]" 84;
+IO_PORT "btn_gpio[4]" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "btn_gpio[5]" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "btn_gpio[6]" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "btn_gpio[7]" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "btn_gpio[8]" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+IO_PORT "btn_gpio[9]" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+// PWM audio on pin 30 (BANK2, 3.3 V)
+IO_LOC "pwm_out" 30;
+IO_PORT "pwm_out" IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+
+// 6 on-board LEDs (active-low, 1.8 V I/O domain)
+IO_LOC "led[0]" 10;
+IO_LOC "led[1]" 11;
+IO_LOC "led[2]" 13;
+IO_LOC "led[3]" 14;
+IO_LOC "led[4]" 15;
+IO_LOC "led[5]" 16;
+IO_PORT "led[0]" IO_TYPE=LVCMOS18;
+IO_PORT "led[1]" IO_TYPE=LVCMOS18;
+IO_PORT "led[2]" IO_TYPE=LVCMOS18;
+IO_PORT "led[3]" IO_TYPE=LVCMOS18;
+IO_PORT "led[4]" IO_TYPE=LVCMOS18;
+IO_PORT "led[5]" IO_TYPE=LVCMOS18;
+
+// UART on PMOD1 (pins 33=TX, 30=RX)
+IO_LOC "uart_tx" 17;
+IO_LOC "uart_rx" 18;
+IO_PORT "uart_tx" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_PORT "uart_rx" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// On-board microSD (SPI mode; TF_CARD on schematic)
+// pin 36 = SCLK, 37 = MOSI/CMD, 38 = CS/DAT3, 39 = MISO/DAT0
+IO_LOC "sd_clk"  36;
+IO_LOC "sd_cmd"  37;
+IO_LOC "sd_dat0" 39;
+IO_LOC "sd_dat3" 38;
+// Drive strength 8 mA; keep MISO pulled up. MOSI/CS idle high via logic.
+IO_PORT "sd_clk"  IO_TYPE=LVCMOS33 PULL_MODE=NONE DRIVE=8;
+IO_PORT "sd_cmd"  IO_TYPE=LVCMOS33 PULL_MODE=UP   DRIVE=8;
+IO_PORT "sd_dat0" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+IO_PORT "sd_dat3" IO_TYPE=LVCMOS33 PULL_MODE=UP   DRIVE=8;
+
+// JTAG on PMOD0 (pins 28=TCK, 27=TDI, 26=TDO, 25=TMS)
+IO_LOC "tck" 28;
+IO_LOC "tdi" 27;
+IO_LOC "tdo" 26;
+IO_LOC "tms" 25;
+IO_PORT "tck" IO_TYPE=LVCMOS33;
+IO_PORT "tdi" IO_TYPE=LVCMOS33;
+IO_PORT "tdo" IO_TYPE=LVCMOS33;
+IO_PORT "tms" IO_TYPE=LVCMOS33;
+
+// 4.3-inch RGB LCD (480x272)
+IO_LOC "lcd_b[4]" 41;
+IO_LOC "lcd_b[3]" 42;
+IO_LOC "lcd_b[2]" 51;
+IO_LOC "lcd_b[1]" 53;
+IO_LOC "lcd_b[0]" 54;
+IO_LOC "lcd_g[5]" 55;
+IO_LOC "lcd_g[4]" 56;
+IO_LOC "lcd_g[3]" 57;
+IO_LOC "lcd_g[2]" 68;
+IO_LOC "lcd_g[1]" 69;
+IO_LOC "lcd_g[0]" 70;
+IO_LOC "lcd_r[4]" 71;
+IO_LOC "lcd_r[3]" 72;
+IO_LOC "lcd_r[2]" 73;
+IO_LOC "lcd_r[1]" 74;
+IO_LOC "lcd_r[0]" 75;
+IO_LOC "lcd_den" 33;
+IO_LOC "lcd_sync" 34;
+IO_LOC "lcd_hync" 40;
+IO_LOC "lcd_clk" 35;
+
+IO_PORT "lcd_b[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_b[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_b[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_b[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_b[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_g[5]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_g[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_g[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_g[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_g[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_g[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_r[4]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_r[3]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_r[2]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_r[1]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_r[0]" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_den" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_sync" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_hync" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+IO_PORT "lcd_clk" IO_TYPE=LVCMOS33 PULL_MODE=UP DRIVE=24;
+
+// Unused header GPIO
+//   29 = BANK2 3.3 V (IOB13A)
+//   85 = BANK3 1.8 V (IOT8B)

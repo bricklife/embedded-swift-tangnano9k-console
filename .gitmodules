@@ -1,0 +1,6 @@
+[submodule "fpga/third_party/hazard3"]
+	path = fpga/third_party/hazard3
+	url = https://github.com/wren6991/hazard3.git
+[submodule "fpga/third_party/libfpga"]
+	path = fpga/third_party/libfpga
+	url = https://github.com/Wren6991/libfpga.git
