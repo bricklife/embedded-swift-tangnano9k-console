@@ -37,7 +37,7 @@ The GUI uses the same RTL, CST, SDC, and file list as the CLI.
 make -C fpga gprj
 ```
 
-Open the generated `fpga/fpga_tangnano9k.gprj` in Gowin EDA and run Place & Route. GUI implementation files may appear under `fpga/impl/`.
+Open the generated `fpga/fpga_tangnano9k.gprj` in Gowin EDA and run Place & Route. This writes an XML project the IDE can open (`gw_sh saveto` emits Tcl, which Gowin EDA rejects as an invalid project file). GUI implementation files may appear under `fpga/impl/`.
 
 ## Hardware
 

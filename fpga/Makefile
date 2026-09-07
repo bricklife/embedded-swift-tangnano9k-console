@@ -65,14 +65,19 @@ $(PRELOAD_V): $(PRELOAD_HEX) | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
-# Generate a Gowin EDA GUI project sharing the same RTL / constraints / file list.
-gprj: sw $(CST) $(SDC) project.tcl Makefile
-	mkdir -p $(BUILD_DIR)
-	@echo "set SRCS {$(SRCS)}" > $(FILELIST_TCL)
-	@echo "set INCDIRS {$(INCDIRS)}" >> $(FILELIST_TCL)
-	cd $(BUILD_DIR) && $(GW_SH) $(abspath project.tcl) \
-		$(DEVICE_FAMILY) $(DEVICE_PART) $(CHIPNAME) \
-		$(CST) $(SDC) $(FILELIST_TCL) save-only
+# Generate a Gowin EDA GUI project (XML .gprj). Do not use gw_sh saveto:
+# that dumps Tcl, which the IDE rejects as "Invalid project file".
+gprj: sw $(CST) $(SDC) gen_gprj.py Makefile
+	$(PYTHON) gen_gprj.py \
+		--root . \
+		--out $(CHIPNAME).gprj \
+		--device-family $(DEVICE_FAMILY) \
+		--device-part $(DEVICE_PART) \
+		--top $(CHIPNAME) \
+		--cst $(CST) \
+		--sdc $(SDC) \
+		$(foreach d,$(INCDIRS),--incdir $(d)) \
+		$(SRCS)
 
 run: synth
 	$(OPENFPGA_LOADER) --board tangnano9k --write-sram $(BITSTREAM)
